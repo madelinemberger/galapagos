@@ -1,0 +1,27 @@
+---
+title: "Results_viz"
+author: "Madeline Berger"
+date: "6/25/2020"
+output: html_document
+---
+##Summary
+
+This script creates visualizations of a small life cycle assessment comparing using  chemical fertilizer as a nutrient source to an alternative, fish silage, in the Galapagos. 
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(here)
+library(janitor)
+
+#read in the data
+
+results <- read_csv(here("/viz", "results_v1.csv")) %>%
+  clean_names() %>% 
+  select(impact_category = x1, fertilizer, fish_silage)
+
+```
+
+First graph will show the ones that seem to have the best comparison in the excel version.
