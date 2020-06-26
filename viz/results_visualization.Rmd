@@ -19,9 +19,20 @@ library(janitor)
 #read in the data
 
 results <- read_csv(here("/viz", "results_v1.csv")) %>%
-  clean_names() %>% 
-  select(impact_category = x1, fertilizer, fish_silage)
+  select(impact_category = X1, value, scenario) 
 
 ```
 
 First graph will show the ones that seem to have the best comparison in the excel version.
+
+```{r}
+
+main <- results %>% 
+  filter(impact_category == "non-renewable energy" | impact_category == "respiratory effects (inorganics)" | impact_category == "human toxicity" | impact_category == "terrestrial ecotoxicity" | impact_category == "climate change") %>% 
+  ggplot(aes(x = impact_category, y = value, group = scenario))+
+  geom_bar(aes(fill = scenario), stat = "identity", position = "dodge")+ 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+main
+```
+
